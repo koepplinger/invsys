@@ -1,0 +1,44 @@
+{
+  "resources": [
+    {"id":{"name":"GUI","path":"objects/GUI/GUI.yy",},"order":8,},
+    {"id":{"name":"addItem","path":"scripts/addItem/addItem.yy",},"order":9,},
+    {"id":{"name":"fillArray","path":"scripts/fillArray/fillArray.yy",},"order":7,},
+    {"id":{"name":"sKatana","path":"sprites/sKatana/sKatana.yy",},"order":3,},
+    {"id":{"name":"room0","path":"rooms/room0/room0.yy",},"order":5,},
+    {"id":{"name":"sWater","path":"sprites/sWater/sWater.yy",},"order":1,},
+    {"id":{"name":"sArmor","path":"sprites/sArmor/sArmor.yy",},"order":4,},
+    {"id":{"name":"destroySelection","path":"scripts/destroySelection/destroySelection.yy",},"order":6,},
+    {"id":{"name":"swapSelection","path":"scripts/swapSelection/swapSelection.yy",},"order":2,},
+  ],
+  "Options": [
+    {"name":"Main","path":"options/main/options_main.yy",},
+    {"name":"Windows","path":"options/windows/options_windows.yy",},
+  ],
+  "isDnDProject": false,
+  "isEcma": false,
+  "tutorialPath": "",
+  "configs": {
+    "name": "Default",
+    "children": [],
+  },
+  "RoomOrder": [
+    {"name":"room0","path":"rooms/room0/room0.yy",},
+  ],
+  "Folders": [],
+  "AudioGroups": [
+    {"targets":461609314234257646,"resourceVersion":"1.0","name":"audiogroup_default","resourceType":"GMAudioGroup",},
+  ],
+  "TextureGroups": [
+    {"isScaled":true,"autocrop":true,"border":2,"mipsToGenerate":0,"targets":461609314234257646,"resourceVersion":"1.0","name":"Default","resourceType":"GMTextureGroup",},
+  ],
+  "IncludedFiles": [
+    {"CopyToMask":-1,"filePath":"datafiles","resourceVersion":"1.0","name":"items.json","resourceType":"GMIncludedFile",},
+  ],
+  "MetaData": {
+    "IDEVersion": "23.1.1.174",
+  },
+  "resourceVersion": "1.3",
+  "name": "invsys",
+  "tags": [],
+  "resourceType": "GMProject",
+}
