@@ -28,5 +28,4 @@ ds_grid_clear(global.InventoryGrid,EMPTY);
 
 // Selection
 global.SelectionGrid=ds_grid_create(COLS,ROWS);
-//global.SelectionGrid[#0,0]=1;
 global.SwappingItems=false;

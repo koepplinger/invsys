@@ -1,80 +1,126 @@
-function swapSelection() {
+/// @function swapSelection(split,peel);
+/// @param {boolean} split
+/// @param {boolean} peel
+
+function swapSelection(split,peel){
+	// Begin swap
 	if !global.SwappingItems{
-		global.SwapList=ds_list_create();
-		// get item map from inventory grid
-		var swapx=ds_grid_value_x(global.SelectionGrid,0,0,ROWS,COLS,1);
-		var swapy=ds_grid_value_y(global.SelectionGrid,0,0,ROWS,COLS,1);
-		var swapitem=global.InventoryGrid[#swapx,swapy];
-		ds_list_add(global.SwapList,swapx,swapy,swapitem);
-	
-		// copy map
+		// Ensure a slot is being selected
+		var selecting=ds_grid_value_exists(global.SelectionGrid,0,0,COLS,ROWS,1);
+		if !selecting exit;
+		// Get the item being selected
+		var sx=ds_grid_value_x(global.SelectionGrid,0,0,COLS,ROWS,1);
+		var sy=ds_grid_value_y(global.SelectionGrid,0,0,COLS,ROWS,1);
+		var item=global.InventoryGrid[#sx,sy];
+		// Ensure an item is selected
+		if !item exit;
+		// Indicate swapping state
 		global.SwappingItems=true;
+		// Remove item
+		global.InventoryGrid[#sx,sy]=EMPTY;
+		// Create swap list
+		global.swap=ds_list_create();
+		ds_list_add(global.swap,sx,sy,item);
+	}
+	// Finish swap
+	else if global.SwappingItems{
+		// Pull original item's values from list
+		var sx=ds_list_find_value(global.swap,0);
+		var sy=ds_list_find_value(global.swap,1);
+		var item=ds_list_find_value(global.swap,2);
+		// Ensure a slot is being selected
+		var selecting=ds_grid_value_exists(global.SelectionGrid,0,0,COLS,ROWS,1);
+		// If a slot isn't being selected
+		if !selecting{
+			// Return item to its original place
+			global.InventoryGrid[#sx,sy]=item;
+		}
+		// If a slot is being selected
+		else{
+			// Get selected item
+			var dx=ds_grid_value_x(global.SelectionGrid,0,0,COLS,ROWS,1);
+			var dy=ds_grid_value_y(global.SelectionGrid,0,0,COLS,ROWS,1);
+			var destination=global.InventoryGrid[#dx,dy];
+			// Check if destination is EMPTY
+			if destination==EMPTY{
+				var replace=false;
+				// If item is stackable and SHIFT is held, split the stack
+				if item[?"stackable"]{
+					if dx==sx&&dy==sy replace=true;
+					else{
+						var amount=item[?"amount"];
+						if split{
+							var adjusted=floor(amount/2);
+							if adjusted>0{
+								var name=item[?"name"];
+								var newitem=ds_map_create();
+								ds_map_copy(newitem,global.ItemMap[?name]);
+								global.InventoryGrid[#sx,sy]=newitem;
+								global.InventoryGrid[#sx,sy][?"amount"]=amount-adjusted;
+								var newitem2=ds_map_create();
+								ds_map_copy(newitem2,global.ItemMap[?name]);
+								global.InventoryGrid[#dx,dy]=newitem2;
+								global.InventoryGrid[#dx,dy][?"amount"]=adjusted;
+							}
+							else replace=true;
+						}
+						else if peel{
+							var adjusted=amount-1;
+							if adjusted>0{
+								var name=item[?"name"];
+								var newitem=ds_map_create();
+								ds_map_copy(newitem,global.ItemMap[?name]);
+								global.InventoryGrid[#sx,sy]=newitem;
+								global.InventoryGrid[#sx,sy][?"amount"]--;
+								var newitem2=ds_map_create();
+								ds_map_copy(newitem2,global.ItemMap[?name]);
+								global.InventoryGrid[#dx,dy]=newitem2;
+								global.InventoryGrid[#sx,sy][?"amount"]=adjusted;
+							}
+							else replace=true;
+						}
+						else replace=true;
+					}
+				}
+				else replace=true;
+				if replace global.InventoryGrid[#dx,dy]=item;
+			}
+			// If destination is not empty
+			else{
+				// If both items are the same and stackable
+				if destination[?"name"]==item[?"name"]&&item[?"stackable"]{
+					var amount=item[?"amount"];
+					if split{
+						var adjusted=floor(amount/2);
+						global.InventoryGrid[#sx,sy]=item;
+						global.InventoryGrid[#sx,sy][?"amount"]=amount-adjusted;
+						if global.InventoryGrid[#sx,sy][?"amount"]<1 global.InventoryGrid[#sx,sy]=EMPTY;
+						destination[?"amount"]+=adjusted;
+					}
+					else if peel{
+						var adjusted=amount-1;
+						global.InventoryGrid[#sx,sy]=item;
+						global.InventoryGrid[#sx,sy][?"amount"]--;
+						if global.InventoryGrid[#sx,sy][?"amount"]<1 global.InventoryGrid[#sx,sy]=EMPTY;
+						destination[?"amount"]++;
+					}
+					// Combine stacks
+					else{
+						destination[?"amount"]+=item[?"amount"];
+						global.InventoryGrid[#sx,sy]=EMPTY;
+					}
+				}
+				else{
+					// Switch the locations of the items
+					global.InventoryGrid[#dx,dy]=ds_list_find_value(global.swap,2);
+					var sx=ds_list_find_value(global.swap,0);
+					var sy=ds_list_find_value(global.swap,1);
+					global.InventoryGrid[#sx,sy]=destination;
+				}
+			}
+		}
+		ds_list_destroy(global.swap);
+		global.SwappingItems=false;
 		exit;
 	}
-	if global.SwappingItems{
-	
-		// Get the second item's (or pointer) x/y/map
-		var swap2x=ds_grid_value_x(global.SelectionGrid,0,0,ROWS,COLS,1),
-		swap2y=ds_grid_value_y(global.SelectionGrid,0,0,ROWS,COLS,1),
-		swap2item=global.InventoryGrid[#swap2x,swap2y];
-	
-		// Get first item's x, y, map, and width/height
-		var swap1x=ds_list_find_value(global.SwapList,0),
-		swap1y=ds_list_find_value(global.SwapList,1),
-		swap1item=ds_list_find_value(global.SwapList,2),
-		width1=swap1item[?"width"],
-		height1=swap1item[?"height"];
-	
-		// Check the region around the second item
-		var go=true;
-		for (var i=1;i<width1;i++){
-			if global.InventoryGrid[#swap2x+i,swap2y]==EMPTY go=true;
-			else go=false;
-			break;
-		}
-		for (var i=1;i<height1;i++){
-			if !go break;
-			if height1+i<ROWS&&global.InventoryGrid[#swap2x,swap2y+i]==EMPTY go=true;
-			else go=false;
-			break;
-		}
-	
-		// If region is empty, add the item
-		if go{
-			// Clear the first item from the inventory
-			global.InventoryGrid[#swap1x,swap1y]=EMPTY;
-			for (var i=1;i<width1;i++){
-				global.InventoryGrid[#swap1x+i,swap1y]=EMPTY go=true;
-				break;
-			}
-			for (var i=1;i<height1;i++){
-				if !go break;
-				global.InventoryGrid[#swap1x,swap1y+i]=EMPTY go=true;
-				break;
-			}
-			// Set pointers in new region
-			var pointer=width1;
-			pointer=pointer<<8|height1;
-			pointer=pointer<<8|swap2x;
-			pointer=pointer<<8|swap2y;
-
-			pointer*=-1;
-			ds_grid_set_region(global.InventoryGrid,swap2x,swap2y,swap2x+width1-1,swap2y+height1-1,pointer);
-			global.InventoryGrid[#swap2x,swap2y]=swap1item;
-		ds_list_destroy(global.SwapList);
-		global.SwappingItems=false;
-			exit;
-		}
-	
-		// check if item1 fits in new spot
-		// check if item2 fits in old spot
-		// delete items
-		// add items in respective slots
-	
-		// Clean up
-		ds_list_destroy(global.SwapList);
-		global.SwappingItems=false;
-	}
-
-
 }

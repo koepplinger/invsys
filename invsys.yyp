@@ -1,14 +1,14 @@
 {
   "resources": [
     {"id":{"name":"GUI","path":"objects/GUI/GUI.yy",},"order":8,},
-    {"id":{"name":"addItem","path":"scripts/addItem/addItem.yy",},"order":9,},
+    {"id":{"name":"addItem","path":"scripts/addItem/addItem.yy",},"order":4,},
     {"id":{"name":"fillArray","path":"scripts/fillArray/fillArray.yy",},"order":7,},
-    {"id":{"name":"sKatana","path":"sprites/sKatana/sKatana.yy",},"order":3,},
-    {"id":{"name":"room0","path":"rooms/room0/room0.yy",},"order":5,},
+    {"id":{"name":"sKatana","path":"sprites/sKatana/sKatana.yy",},"order":2,},
+    {"id":{"name":"room0","path":"rooms/room0/room0.yy",},"order":9,},
     {"id":{"name":"sWater","path":"sprites/sWater/sWater.yy",},"order":1,},
-    {"id":{"name":"sArmor","path":"sprites/sArmor/sArmor.yy",},"order":4,},
+    {"id":{"name":"sArmor","path":"sprites/sArmor/sArmor.yy",},"order":3,},
     {"id":{"name":"destroySelection","path":"scripts/destroySelection/destroySelection.yy",},"order":6,},
-    {"id":{"name":"swapSelection","path":"scripts/swapSelection/swapSelection.yy",},"order":2,},
+    {"id":{"name":"swapSelection","path":"scripts/swapSelection/swapSelection.yy",},"order":5,},
   ],
   "Options": [
     {"name":"Main","path":"options/main/options_main.yy",},
