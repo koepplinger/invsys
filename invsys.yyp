@@ -2,7 +2,6 @@
   "resources": [
     {"id":{"name":"GUI","path":"objects/GUI/GUI.yy",},"order":8,},
     {"id":{"name":"addItem","path":"scripts/addItem/addItem.yy",},"order":4,},
-    {"id":{"name":"fillArray","path":"scripts/fillArray/fillArray.yy",},"order":7,},
     {"id":{"name":"sKatana","path":"sprites/sKatana/sKatana.yy",},"order":2,},
     {"id":{"name":"room0","path":"rooms/room0/room0.yy",},"order":9,},
     {"id":{"name":"sWater","path":"sprites/sWater/sWater.yy",},"order":1,},
