@@ -1,19 +1,19 @@
 [
   {
     "name": "Katana",
-    "sprite": "sKatana",
+    "sprite": "spr_Katana",
     "stackable": false,
     "amount": 1
   },
   {
     "name": "Armor",
-    "sprite": "sArmor",
+    "sprite": "spr_Armor",
     "stackable": false,
     "amount": 1
   },
   {
     "name": "Water",
-    "sprite": "sWater",
+    "sprite": "spr_Water",
     "stackable": true,
     "amount": 1
   }

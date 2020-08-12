@@ -1,0 +1,119 @@
+GAUNTLET
+
+**open the items and skills spreadsheet**
+https://docs.google.com/spreadsheets/d/1mouGfNN9WRd-NPcDrwhqApfemg11STyeCK92VLGnHK8/edit#gid=0
+https://docs.google.com/spreadsheets/d/1WX4_ZmORQs6RfRKt9ZsytVK7sbemJAf9UDwgFGrE5O0/edit#gid=0
+
+items spreadsheet
+	- contains information needed for player stats and damage formula
+skills spreadsheet
+	- contains info for the spell objects created in game
+damage formula
+	- logic that determines what happens when hits are traded\
+	- pulls info from spell object(which calcs from player stats) and 
+stats/attributes
+
+ties this all together!
+
+homogenous player character
+	- has a base attack based on weapon type
+		weapons:
+			power:
+				- halberd
+				- spear
+			magic
+				- wand
+				- orb
+			faith
+				- staff
+				- totem
+			speed:
+				- sword
+				- bow
+skill gems (8)
+	no support gems, instead modifiable
+	properties:
+		power (atk) 
+		acuity (crit)
+		faith (cdr)
+		pace (atk spd)
+		base type
+		attack
+			- dragon smash
+			- ruthless stab
+		spell
+			- fireball
+			- frostbolt
+		prayer
+			- radiance (damage and steal ms)
+			- tranquility (damage and steal hp)
+		maneuver
+			- lunge
+			- sprint
+	modifications
+		unique ways to modify gems
+		"orange tincture"
+			- gem does magical damage instead of physical
+			- gem has lower cooldown
+			- every third cast of gem is free
+			- critical strikes cause an explosion
+			- casting this gem while a prayer is active does xyz
+			- using this gem while low on mana does abc
+			- when low on life, this gem does bonus damage
+			- bonus damage if cast while moving
+			- heal for x every time gem is cast near an enemy
+		modifying a gem is permanent & 1-5 slots
+items (many)
+	shared stash
+	item properties
+	modification orbs
+		"gamble orbs"
+			- -5 to +5 of a stat
+			- -1-5 durability
+			- 100% - durability = chance to break
+			- "92% chance to break, are you sure?"
+		"safe orbs"
+			- +1-3 to a stat
+			- -10-20 durability
+		"modifier orbs"
+			- +10% additive bonus power/magic/etc
+			- -30 durability
+enemies (10)
+	stats
+	combat
+	loot
+	experience
+	modifiable
+talent web (22+)
+	static start point
+	keystones
+	connectivity in farther branches
+stats
+	base stats:
+	hp
+	mp
+	pp
+	ms
+
+	attack stats:
+	power (atk) (knockback)
+	acuity (crit) (stun)
+	faith (cdr) ()
+	pace (atk spd) (slow)
+
+	defense stats:
+	armor (physical reduction)
+	resistance (magic reduction)
+	resolve (lower prayer drain)
+	evasion (dodge chance)
+
+
+
+combat (calculated from bonuses)
+	damage = spell damage + power - armor/resist
+	roll 1-100, if roll < evasion chance, DODGE (damage = 0)
+	roll 1-100, if roll < crit chance, CRIT (damage *= crit multiplier)
+acts
+	procedurally generated maps
+	quests
+permanent death
