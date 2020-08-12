@@ -2,119 +2,124 @@
 /// @param {boolean} split
 /// @param {boolean} peel
 function selectionSwap(split,peel){
-	// Begin swap
 	if !SwappingItems{
-		// Ensure a slot is being selected
-		var selecting=ds_grid_value_exists(SelectionGrid,0,0,COLS,ROWS,1);
-		if !selecting exit;
-		// Get the item being selected
-		var sx=ds_grid_value_x(SelectionGrid,0,0,COLS,ROWS,1);
-		var sy=ds_grid_value_y(SelectionGrid,0,0,COLS,ROWS,1);
-		var item=InventoryGrid[#sx,sy];
-		// Ensure an item is selected
+		var selectingsomething=ds_grid_value_exists(SelectionGrid,0,0,COLS,ROWS,1);
+		if !selectingsomething exit;
+		
+		var selx=ds_grid_value_x(SelectionGrid,0,0,COLS,ROWS,1);
+		var sely=ds_grid_value_y(SelectionGrid,0,0,COLS,ROWS,1);
+		var item=InventoryGrid[#selx,sely];
 		if !item exit;
-		// Indicate swapping state
+		
+		InventoryGrid[#selx,sely]=EMPTY;
 		SwappingItems=true;
-		// Remove item
-		InventoryGrid[#sx,sy]=EMPTY;
-		// Create swap list
 		SwapList=ds_list_create();
-		ds_list_add(SwapList,sx,sy,item);
+		ds_list_add(SwapList,selx,sely,item);
 	}
-	// Finish swap
 	else if SwappingItems{
-		// Pull original item's values from list
-		var sx=ds_list_find_value(SwapList,0);
-		var sy=ds_list_find_value(SwapList,1);
+		var x1=ds_list_find_value(SwapList,0);
+		var y1=ds_list_find_value(SwapList,1);
 		var item=ds_list_find_value(SwapList,2);
+		
 		// Ensure a slot is being selected
-		var selecting=ds_grid_value_exists(SelectionGrid,0,0,COLS,ROWS,1);
-		// If a slot isn't being selected return item to its original place
-		if !selecting InventoryGrid[#sx,sy]=item;
-		// If a slot is being selected
+		var selectingsomething=ds_grid_value_exists(SelectionGrid,0,0,COLS,ROWS,1);
+		if !selectingsomething InventoryGrid[#x1,y1]=item;
 		else{
-			// Get selected item
-			var dx=ds_grid_value_x(SelectionGrid,0,0,COLS,ROWS,1);
-			var dy=ds_grid_value_y(SelectionGrid,0,0,COLS,ROWS,1);
-			var destination=InventoryGrid[#dx,dy];
+			// Get coordinates and map of second item
+			var x2=ds_grid_value_x(SelectionGrid,0,0,COLS,ROWS,1);
+			var y2=ds_grid_value_y(SelectionGrid,0,0,COLS,ROWS,1);
+			var destination=InventoryGrid[#x2,y2];
 			// Check if destination is EMPTY
 			if destination==EMPTY{
-				var replace=false;
-				// If item is stackable and SHIFT is held, split the stack
+				var movewhole=false;
+				// If first item is stackable
 				if item[?"stackable"]{
-					if dx==sx&&dy==sy replace=true;
+					// If start and destination are same
+					if x2==x1&&y2==y1 movewhole=true;
+					// If start and destination are different
 					else{
+						// Get amount of first item
 						var amount=item[?"amount"];
+						// Split first stack in half
 						if split{
 							var adjusted=floor(amount/2);
-							if adjusted>0{
+							if adjusted{
 								var name=item[?"name"];
 								var firstitem=ds_map_create();
 								ds_map_copy(firstitem,ItemMap[?name]);
-								InventoryGrid[#sx,sy]=firstitem;
-								InventoryGrid[#sx,sy][?"amount"]=amount-adjusted;
+								InventoryGrid[#x1,y1]=firstitem;
+								InventoryGrid[#x1,y1][?"amount"]=amount-adjusted;
 								var seconditem=ds_map_create();
 								ds_map_copy(seconditem,ItemMap[?name]);
-								InventoryGrid[#dx,dy]=seconditem;
-								InventoryGrid[#dx,dy][?"amount"]=adjusted;
+								InventoryGrid[#x2,y2]=seconditem;
+								InventoryGrid[#x2,y2][?"amount"]=adjusted;
 							}
-							else replace=true;
+							// If first item (adjusted) amount is 0
+							else movewhole=true;
 						}
+						// Peel one from the stack
 						else if peel{
 							var adjusted=amount-1;
-							if adjusted>0{
+							if adjusted{
 								var name=item[?"name"];
 								var firstitem=ds_map_create();
 								ds_map_copy(firstitem,ItemMap[?name]);
-								InventoryGrid[#sx,sy]=firstitem;
-								InventoryGrid[#sx,sy][?"amount"]--;
+								InventoryGrid[#x1,y1]=firstitem;
+								InventoryGrid[#x1,y1][?"amount"]--;
 								var seconditem=ds_map_create();
 								ds_map_copy(seconditem,ItemMap[?name]);
-								InventoryGrid[#dx,dy]=seconditem;
-								InventoryGrid[#sx,sy][?"amount"]=adjusted;
+								InventoryGrid[#x2,y2]=seconditem;
+								InventoryGrid[#x1,y1][?"amount"]=adjusted;
 							}
-							else replace=true;
+							// If first item (adjusted) amount is 0
+							else movewhole=true;
 						}
-						else replace=true;
+						// If not splitting or peeling
+						else movewhole=true;
 					}
 				}
-				else replace=true;
-				if replace InventoryGrid[#dx,dy]=item;
+				// If the item isn't stackable
+				else movewhole=true;
+				// Move item to the destination slot
+				if movewhole InventoryGrid[#x2,y2]=item;
 			}
 			// If destination is not empty
 			else{
-				// If both items are the same and stackable
+				// If identical item names and stackable
 				if destination[?"name"]==item[?"name"]&&item[?"stackable"]{
 					var amount=item[?"amount"];
+					// Split first stack and add to second stack
 					if split{
 						var adjusted=floor(amount/2);
-						InventoryGrid[#sx,sy]=item;
-						InventoryGrid[#sx,sy][?"amount"]=amount-adjusted;
-						if InventoryGrid[#sx,sy][?"amount"]<1 InventoryGrid[#sx,sy]=EMPTY;
+						InventoryGrid[#x1,y1]=item;
+						InventoryGrid[#x1,y1][?"amount"]=amount-adjusted;
+						if InventoryGrid[#x1,y1][?"amount"]<1 InventoryGrid[#x1,y1]=EMPTY;
 						destination[?"amount"]+=adjusted;
 					}
+					// Peel one off first stack to second stack
 					else if peel{
 						var adjusted=amount-1;
-						InventoryGrid[#sx,sy]=item;
-						InventoryGrid[#sx,sy][?"amount"]--;
-						if InventoryGrid[#sx,sy][?"amount"]<1 InventoryGrid[#sx,sy]=EMPTY;
+						InventoryGrid[#x1,y1]=item;
+						InventoryGrid[#x1,y1][?"amount"]--;
+						if InventoryGrid[#x1,y1][?"amount"]<1 InventoryGrid[#x1,y1]=EMPTY;
 						destination[?"amount"]++;
 					}
 					// Combine stacks
 					else{
 						destination[?"amount"]+=item[?"amount"];
-						InventoryGrid[#sx,sy]=EMPTY;
+						InventoryGrid[#x1,y1]=EMPTY;
 					}
 				}
+				// Switch the locations of the items
 				else{
-					// Switch the locations of the items
-					InventoryGrid[#dx,dy]=ds_list_find_value(SwapList,2);
-					var sx=ds_list_find_value(SwapList,0);
-					var sy=ds_list_find_value(SwapList,1);
-					InventoryGrid[#sx,sy]=destination;
+					InventoryGrid[#x2,y2]=ds_list_find_value(SwapList,2);
+					var x1=ds_list_find_value(SwapList,0);
+					var y1=ds_list_find_value(SwapList,1);
+					InventoryGrid[#x1,y1]=destination;
 				}
 			}
 		}
+		// Cleanup
 		ds_list_destroy(SwapList);
 		SwappingItems=false;
 		exit;

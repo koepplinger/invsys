@@ -5,10 +5,12 @@ function systemFile(command){
 	var section="items";
 	var key="inventory";
 	if command=="save"{
-		ini_write_string(section,key,ds_grid_write(InventoryGrid));
+		var grid=ds_grid_write(InventoryGrid);
+		ini_write_string(section,key,grid);
 	}
 	if command=="load"&&ini_section_exists(section){
-		ds_grid_read(InventoryGrid,ini_read_string(section,key,""));
+		var inistring=ini_read_string(section,key,"");
+		ds_grid_read(InventoryGrid,inistring);
 	}
 	ini_close();
 }

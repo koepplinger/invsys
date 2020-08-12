@@ -1,13 +1,13 @@
 {
   "resources": [
-    {"id":{"name":"InventoryController","path":"objects/InventoryController/InventoryController.yy",},"order":2,},
-    {"id":{"name":"selectionDestroy","path":"scripts/selectionDestroy/selectionDestroy.yy",},"order":4,},
-    {"id":{"name":"selectionSwap","path":"scripts/selectionSwap/selectionSwap.yy",},"order":3,},
-    {"id":{"name":"itemAdd","path":"scripts/itemAdd/itemAdd.yy",},"order":1,},
+    {"id":{"name":"InventoryController","path":"objects/InventoryController/InventoryController.yy",},"order":0,},
+    {"id":{"name":"selectionDestroy","path":"scripts/selectionDestroy/selectionDestroy.yy",},"order":5,},
+    {"id":{"name":"selectionSwap","path":"scripts/selectionSwap/selectionSwap.yy",},"order":4,},
+    {"id":{"name":"itemAdd","path":"scripts/itemAdd/itemAdd.yy",},"order":2,},
     {"id":{"name":"spr_Katana","path":"sprites/spr_Katana/spr_Katana.yy",},"order":1,},
-    {"id":{"name":"systemFile","path":"scripts/systemFile/systemFile.yy",},"order":0,},
-    {"id":{"name":"selectionUpdate","path":"scripts/selectionUpdate/selectionUpdate.yy",},"order":5,},
-    {"id":{"name":"itemDestroy","path":"scripts/itemDestroy/itemDestroy.yy",},"order":2,},
+    {"id":{"name":"systemFile","path":"scripts/systemFile/systemFile.yy",},"order":1,},
+    {"id":{"name":"selectionUpdate","path":"scripts/selectionUpdate/selectionUpdate.yy",},"order":6,},
+    {"id":{"name":"itemDestroy","path":"scripts/itemDestroy/itemDestroy.yy",},"order":3,},
     {"id":{"name":"testroom","path":"rooms/testroom/testroom.yy",},"order":3,},
     {"id":{"name":"spr_Water","path":"sprites/spr_Water/spr_Water.yy",},"order":0,},
     {"id":{"name":"spr_Armor","path":"sprites/spr_Armor/spr_Armor.yy",},"order":2,},
@@ -28,7 +28,7 @@
   ],
   "Folders": [
     {"folderPath":"folders/Icons.yy","order":0,"resourceVersion":"1.0","name":"Icons","tags":[],"resourceType":"GMFolder",},
-    {"folderPath":"folders/Scripts.yy","order":1,"resourceVersion":"1.0","name":"Scripts","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/Inventory.yy","order":1,"resourceVersion":"1.0","name":"Inventory","tags":[],"resourceType":"GMFolder",},
   ],
   "AudioGroups": [
     {"targets":461609314234257646,"resourceVersion":"1.0","name":"audiogroup_default","resourceType":"GMAudioGroup",},

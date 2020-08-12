@@ -1,11 +1,11 @@
-/// @function	itemDestroy(item);
-/// @param		{string}	item	The name of the item to destroy
-function itemDestroy(item){
+/// @function	itemDestroy(name);
+/// @param		{string}	name	The name of the item to destroy
+function itemDestroy(name){
 	for (var h=0;h<ROWS;++h;){
 		for (var w=0;w<COLS;++w;){
 			var slot=InventoryGrid[#w,h];
 			if slot!=EMPTY{
-				if item==slot[?"name"]{
+				if name==slot[?"name"]{
 					if slot[?"stackable"] slot[?"amount"]--;
 					else InventoryGrid[#w,h]=EMPTY;
 					exit;
