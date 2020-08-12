@@ -6,14 +6,9 @@ function itemDestroy(item){
 			var slot=InventoryGrid[#w,h];
 			if slot!=EMPTY{
 				if item==slot[?"name"]{
-					if slot[?"stackable"]{
-						slot[?"amount"]--;
-						exit;
-					}
-					else{
-						InventoryGrid[#w,h]=EMPTY;
-						exit;
-					}
+					if slot[?"stackable"] slot[?"amount"]--;
+					else InventoryGrid[#w,h]=EMPTY;
+					exit;
 				}
 			}
 		}
