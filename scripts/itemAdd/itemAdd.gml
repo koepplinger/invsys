@@ -5,8 +5,8 @@ function itemAdd(item){
 	if ItemMap[?item][?"stackable"]{
 		for (var h=0;h<ROWS;++h;){
 			for (var w=0;w<COLS;++w;){
-				var slot=InventoryGrid[#w,h];
-				if slot!=EMPTY{
+				var slot=Inventory[#w,h];
+				if slot{
 					var existing=slot[?"name"];
 					if item==existing{
 						slot[?"amount"]++;
@@ -17,15 +17,15 @@ function itemAdd(item){
 		}
 	}
 	// Add item to first empty slot
-	var space=ds_grid_value_exists(InventoryGrid,0,0,COLS,ROWS,EMPTY);
+	var space=ds_grid_value_exists(Inventory,0,0,COLS,ROWS,EMPTY);
 	if !space exit;
 	var copy=ds_map_create();
 	ds_map_copy(copy,ItemMap[?item]);
 	for (var h=0;h<ROWS;++h;){
 		for (var w=0;w<COLS;++w;){
-			var slot=InventoryGrid[#w,h];
+			var slot=Inventory[#w,h];
 			if slot==EMPTY{
-				InventoryGrid[#w,h]=copy;
+				Inventory[#w,h]=copy;
 				exit;
 			}
 		}

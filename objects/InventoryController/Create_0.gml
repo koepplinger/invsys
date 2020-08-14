@@ -15,7 +15,7 @@ for (var i=0;i<ds_list_size(list);i++){
 	ds_map_add(ItemMap,name,prop);
 }
 
-// CREATE INVENTORY
+// INVENTORY
 #macro SAVEFILE "save.ini"
 #macro ANCHORX 0
 #macro ANCHORY 0
@@ -23,9 +23,19 @@ for (var i=0;i<ds_list_size(list);i++){
 #macro COLS 4
 #macro ROWS 8
 #macro EMPTY -1
-InventoryGrid=ds_grid_create(COLS,ROWS);
-ds_grid_clear(InventoryGrid,EMPTY);
+Inventory=ds_grid_create(COLS,ROWS);
+ds_grid_clear(Inventory,EMPTY);
 
-// Selection
-SelectionGrid=ds_grid_create(COLS,ROWS);
-SwappingItems=false;
+// SELECTION
+Selection=ds_grid_create(COLS,ROWS);
+Swapping=false;
+
+// KEYBINDS
+#macro QUIT vk_escape
+#macro SAVE vk_f1
+#macro LOAD vk_f2
+#macro DESTROY vk_delete
+#macro DESTROKATANA vk_backspace
+#macro SWAP mb_left
+#macro SPLIT vk_shift
+#macro PEEL vk_control
