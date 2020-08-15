@@ -15,7 +15,18 @@ for (var i=0;i<ds_list_size(list);i++){
 	ds_map_add(items,key,prop);
 }
 
-// inv
+// KEYBIND SETUP
+#macro QUIT vk_escape
+#macro SAVE vk_f1
+#macro LOAD vk_f2
+#macro DESTROY vk_delete
+#macro SUBTRACT vk_subtract
+#macro DESTROYKATANA vk_backspace
+#macro SWAP mb_left
+#macro SPLIT vk_shift
+#macro PEEL vk_control
+
+// INVENTORY SETUP
 #macro SAVEFILE "save.ini"
 #macro ANCHORX 0
 #macro ANCHORY 0
@@ -26,17 +37,6 @@ for (var i=0;i<ds_list_size(list);i++){
 inv=ds_grid_create(COLS,ROWS);
 ds_grid_clear(inv,EMPTY);
 
-// sel
+// SELECTION SETUP
 sel=ds_grid_create(COLS,ROWS);
 swap={now: false};
-
-// KEYBINDS
-#macro QUIT vk_escape
-#macro SAVE vk_f1
-#macro LOAD vk_f2
-#macro DESTROY vk_delete
-#macro SUBTRACT vk_subtract
-#macro DESTROYKATANA vk_backspace
-#macro SWAP mb_left
-#macro SPLIT vk_shift
-#macro PEEL vk_control

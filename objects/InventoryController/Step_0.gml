@@ -4,7 +4,7 @@ if keyboard_check_pressed(ord("W")) itemAdd("Armor");
 if keyboard_check_pressed(ord("E")) itemAdd("Water");
 if keyboard_check_pressed(DESTROYKATANA) itemDestroy("Katana");
 
-// Main logic loop
+// Main loop
 selUpdate();
 if keyboard_check_pressed(QUIT) game_restart();
 if keyboard_check_pressed(SAVE) systemFile("save");

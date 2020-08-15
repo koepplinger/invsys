@@ -3,6 +3,7 @@
 /// @param {boolean} peel
 function selSwap(split,peel){
 	var slotselected=ds_grid_value_exists(sel,0,0,COLS,ROWS,1);
+	// Pick up an item
 	if !swap.now{
 		if !slotselected exit;
 		var sx=ds_grid_value_x(sel,0,0,COLS,ROWS,1);
@@ -12,6 +13,7 @@ function selSwap(split,peel){
 		inv[#sx,sy]=EMPTY;
 		swap={now:true,x:sx,y:sy,map:item};
 	}
+	// Release item
 	else if swap.now{
 		var x1=swap.x;
 		var y1=swap.y;
@@ -21,7 +23,7 @@ function selSwap(split,peel){
 			var x2=ds_grid_value_x(sel,0,0,COLS,ROWS,1);
 			var y2=ds_grid_value_y(sel,0,0,COLS,ROWS,1);
 			var item2=inv[#x2,y2];
-			// Empty destination slot
+			// Move item
 			if item2==EMPTY{
 				var moveall=false;
 				if item1[?"stackable"]{
@@ -58,7 +60,7 @@ function selSwap(split,peel){
 				else moveall=true;
 				if moveall inv[#x2,y2]=item1;
 			}
-			// Identical items
+			// Stack-to-stack transfer
 			else if item1[?"stackable"]&&item2[?"name"]==item1[?"name"]{
 				var amount=item1[?"amount"];
 				if split{
@@ -80,7 +82,7 @@ function selSwap(split,peel){
 					inv[#x1,y1]=EMPTY;
 				}
 			}
-			// swap two items
+			// Simple swap
 			else{
 				inv[#x2,y2]=item1;
 				inv[#x1,y1]=item2;
