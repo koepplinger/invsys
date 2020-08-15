@@ -2,12 +2,12 @@
 /// @param {boolean} split
 /// @param {boolean} peel
 function selSwap(split,peel){
-	var slotselected=ds_grid_value_exists(sel,0,0,COLS,ROWS,1);
+	var slotselected=ds_grid_value_exists(sel,0,0,COLS,ROWS,CURRENT);
 	// Pick up an item
 	if !swap.now{
 		if !slotselected exit;
-		var sx=ds_grid_value_x(sel,0,0,COLS,ROWS,1);
-		var sy=ds_grid_value_y(sel,0,0,COLS,ROWS,1);
+		var sx=ds_grid_value_x(sel,0,0,COLS,ROWS,CURRENT);
+		var sy=ds_grid_value_y(sel,0,0,COLS,ROWS,CURRENT);
 		var item=inv[#sx,sy];
 		if !item exit;
 		inv[#sx,sy]=EMPTY;
@@ -20,8 +20,8 @@ function selSwap(split,peel){
 		var item1=swap.map;
 		if !slotselected inv[#x1,y1]=item1;
 		else{
-			var x2=ds_grid_value_x(sel,0,0,COLS,ROWS,1);
-			var y2=ds_grid_value_y(sel,0,0,COLS,ROWS,1);
+			var x2=ds_grid_value_x(sel,0,0,COLS,ROWS,CURRENT);
+			var y2=ds_grid_value_y(sel,0,0,COLS,ROWS,CURRENT);
 			var item2=inv[#x2,y2];
 			// Move item
 			if item2==EMPTY{
@@ -64,7 +64,7 @@ function selSwap(split,peel){
 			else if item1[?"stackable"]&&item2[?"name"]==item1[?"name"]{
 				var amount=item1[?"amount"];
 				if split{
-					var adjusted=floor(amount/2);
+					var adjusted=max(1,floor(amount/2));
 					inv[#x1,y1]=item1;
 					inv[#x1,y1][?"amount"]=amount-adjusted;
 					if inv[#x1,y1][?"amount"]<1 inv[#x1,y1]=EMPTY;

@@ -34,6 +34,7 @@ for (var i=0;i<ds_list_size(list);i++){
 #macro COLS 4
 #macro ROWS 8
 #macro EMPTY -1
+#macro CURRENT 1
 inv=ds_grid_create(COLS,ROWS);
 ds_grid_clear(inv,EMPTY);
 

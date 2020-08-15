@@ -7,11 +7,11 @@ function selUpdate(){
 			var slotx=ANCHORX+ICON*(w+1);
 			var sloty=ANCHORY+ICON*(h+1);
 			if mx>ANCHORX&&mx<slotx&&my>ANCHORY&&my<sloty{
-				ds_grid_clear(sel,0);
-				sel[#w,h]=1;
+				ds_grid_clear(sel,EMPTY);
+				sel[#w,h]=CURRENT;
 				exit;
 			}
-			else ds_grid_clear(sel,0);
+			else ds_grid_clear(sel,EMPTY);
 		}
 	}
 }

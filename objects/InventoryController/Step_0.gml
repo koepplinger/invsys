@@ -1,8 +1,8 @@
 // Developer controls
-if keyboard_check_pressed(ord("Q")) itemAdd("Katana");
-if keyboard_check_pressed(ord("W")) itemAdd("Armor");
-if keyboard_check_pressed(ord("E")) itemAdd("Water");
-if keyboard_check_pressed(DESTROYKATANA) itemDestroy("Katana");
+if keyboard_check_pressed(ord("Q")) itemAdd("Katana",1);
+if keyboard_check_pressed(ord("W")) itemAdd("Armor",1);
+if keyboard_check_pressed(ord("E")) itemAdd("Water",6);
+if keyboard_check_pressed(DESTROYKATANA) itemSubtract("Water",3);
 
 // Main loop
 selUpdate();
