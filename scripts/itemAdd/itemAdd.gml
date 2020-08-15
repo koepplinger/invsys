@@ -2,10 +2,10 @@
 /// @param		{string}	item	The name of the item to add
 function itemAdd(item){
 	// Add one to an existing item's amount
-	if ItemMap[?item][?"stackable"]{
+	if items[?item][?"stackable"]{
 		for (var h=0;h<ROWS;++h;){
 			for (var w=0;w<COLS;++w;){
-				var slot=Inventory[#w,h];
+				var slot=inv[#w,h];
 				if slot{
 					var existing=slot[?"name"];
 					if item==existing{
@@ -17,18 +17,18 @@ function itemAdd(item){
 		}
 	}
 	// Add item to first empty slot
-	var space=ds_grid_value_exists(Inventory,0,0,COLS,ROWS,EMPTY);
+	var space=ds_grid_value_exists(inv,0,0,COLS,ROWS,EMPTY);
 	if !space exit;
 	var copy=ds_map_create();
-	ds_map_copy(copy,ItemMap[?item]);
+	ds_map_copy(copy,items[?item]);
 	for (var h=0;h<ROWS;++h;){
 		for (var w=0;w<COLS;++w;){
-			var slot=Inventory[#w,h];
+			var slot=inv[#w,h];
 			if slot==EMPTY{
-				Inventory[#w,h]=copy;
+				inv[#w,h]=copy;
 				exit;
 			}
 		}
 	}
-	//show_debug_message("inventory full");
+	//show_debug_message("inv full");
 }

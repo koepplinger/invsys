@@ -6,7 +6,7 @@
     "path": "folders/Inventory.yy",
   },
   "resourceVersion": "1.0",
-  "name": "selectionUpdate",
+  "name": "selUpdate",
   "tags": [],
   "resourceType": "GMScript",
 }
