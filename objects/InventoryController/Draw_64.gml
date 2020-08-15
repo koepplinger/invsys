@@ -1,4 +1,3 @@
-// inv GUI elements
 for (var h=0;h<ROWS;++h;){
 	for (var w=0;w<COLS;++w;){
 		var item=ds_grid_get(inv,w,h)
@@ -36,7 +35,7 @@ for (var h=0;h<ROWS;++h;){
 	}
 }
 	
-// Swapping
+// Swap effect
 if swap.now{
 	var sprite=asset_get_index(swap.map[?"sprite"]);
 	var sx=device_mouse_x_to_gui(0)-ICON/2;

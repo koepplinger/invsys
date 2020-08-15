@@ -3,7 +3,7 @@
 /// @param {boolean} peel
 function selSwap(split,peel){
 	var slotselected=ds_grid_value_exists(sel,0,0,COLS,ROWS,CURRENT);
-	// Pick up an item
+	// Pick up item
 	if !swap.now{
 		if !slotselected exit;
 		var sx=ds_grid_value_x(sel,0,0,COLS,ROWS,CURRENT);
