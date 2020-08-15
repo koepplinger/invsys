@@ -1,2 +1,1 @@
-# invsys
-Inventory System for GMS2.3 by Ken Koepplinger
+# [Latest release](https://github.com/koepplinger/invsys/releases/tag/v0.1)
