@@ -6,12 +6,12 @@ function selSwap(split,peel){
 	// Pick up item
 	if !swap.now{
 		if !slotselected exit;
-		var sx=ds_grid_value_x(sel,0,0,COLS,ROWS,CURRENT);
-		var sy=ds_grid_value_y(sel,0,0,COLS,ROWS,CURRENT);
-		var item=inv[#sx,sy];
+		var selx=ds_grid_value_x(sel,0,0,COLS,ROWS,CURRENT);
+		var sely=ds_grid_value_y(sel,0,0,COLS,ROWS,CURRENT);
+		var item=inv[#selx,sely];
 		if !item exit;
-		inv[#sx,sy]=EMPTY;
-		swap={now:true,x:sx,y:sy,map:item};
+		inv[#selx,sely]=EMPTY;
+		swap={now:true,x:selx,y:sely,map:item};
 	}
 	// Release item
 	else if swap.now{

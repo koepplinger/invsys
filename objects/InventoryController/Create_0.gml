@@ -40,4 +40,4 @@ ds_grid_clear(inv,EMPTY);
 
 // SELECTION SETUP
 sel=ds_grid_create(COLS,ROWS);
-swap={now: false};
+swap={now:false};

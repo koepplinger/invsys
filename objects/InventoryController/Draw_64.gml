@@ -34,7 +34,6 @@ for (var h=0;h<ROWS;++h;){
 		}
 	}
 }
-	
 // Swap effect
 if swap.now{
 	var sprite=asset_get_index(swap.map[?"sprite"]);
